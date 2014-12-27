@@ -32,7 +32,7 @@ PORT="443"
 exec > /dev/null 2>&1
 
 CHANNEL=$(git show HEAD:.sparkleshare)
-MESSAGE=$(git rev-list HEAD | head -n 1)
+MESSAGE=$(git rev-list --max-count=1 HEAD)
 
 DATA="announce ${CHANNEL} ${MESSAGE}"
 echo "${DATA}\n" | socat - TCP-CONNECT:${SERVER}:${PORT} &
